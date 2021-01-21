@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(roswasm_webgui)
+project(roswasm_webgui_native)
 
-option(ROSWASM_NATIVE "Compile with ROS Native version of ROSWASM" OFF)
+option(ROSWASM_NATIVE "Compile with ROS Native version of ROSWASM" ON)
 
 if (DEFINED ENV{EMSDK} OR ${ROSWASM_NATIVE})
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS roscpp roswasm std_msgs sensor_msgs geometry_msgs nav_msgs rosmon_msgs)
+find_package(catkin REQUIRED COMPONENTS roscpp roswasm_native std_msgs sensor_msgs geometry_msgs nav_msgs rosmon_msgs)
 
 ###################################
 ## catkin specific configuration ##
@@ -36,7 +36,7 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${ROSWASM_WEBGUI_LIB}
   CFG_EXTRAS roswasm_webgui-extras.cmake
-  CATKIN_DEPENDS roswasm
+  CATKIN_DEPENDS roswasm_native
 #  DEPENDS system_lib
 )
 endif()
