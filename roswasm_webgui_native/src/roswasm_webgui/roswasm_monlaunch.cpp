@@ -53,8 +53,8 @@ void LaunchState::callback(const rosmon_msgs::State& new_msg)
 {
     msg = new_msg;
     start_stop_launch_node();
-    printf("Got quite simple msg\n");
-    printf("Nodes len: %zu\n", new_msg.nodes.size());
+    // printf("Got quite simple msg\n");
+    // printf("Nodes len: %zu\n", new_msg.nodes.size());
 }
 
 void LaunchState::start_stop_launch(uint8_t action)
@@ -105,6 +105,22 @@ LaunchState::LaunchState(roswasm::NodeHandle& node_handle, const std::string& to
 LaunchState::LaunchState() {} // : sub(nullptr) {}
 
 const char* LaunchState::status[] = { "IDLE", "RUNNING", "CRASHED", "WAITING" };
+
+void MonlaunchWidget::get_states(std::map<const char*, std::vector<int>>& states)
+{
+    std::map<const char*, std::vector<int>> _states;
+    for (std::pair<const std::string, LaunchState*>& state : launch_states) {
+        if (state.second->msg.nodes.empty()) {
+            continue;
+        }
+        char *_name = strdup(state.second->name.c_str());
+        for (int i = 0; i < state.second->msg.nodes.size(); i++)
+        {
+            _states[_name].push_back(state.second->msg.nodes[i].state);
+        }
+    }
+    states = _states;
+}
 
 void MonlaunchWidget::service_callback(const rosapi::TopicsForType::Response& res, bool result)
 {
