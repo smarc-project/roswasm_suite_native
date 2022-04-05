@@ -2,8 +2,8 @@
 Changelog for package roswasm_native
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.5 (2022-04-05)
+------------------
 * Merge pull request `#5 <https://github.com/smarc-project-native-gui/roswasm_suite_native/issues/5>`_ from smarc-project-native-gui/merge_upstream
   Merge upstream
 * Updated to new upstream
